@@ -76,28 +76,28 @@ if (!function_exists('_trimSpace')) {
     }
 }
 
-// if (!function_exists('_hasPermission')) {
-//     /**
-//      * Check permission
-//      *
-//      * @param $auth
-//      * @param $user
-//      * @return bool
-//      */
-//     function _hasPermission($auth, $user)
-//     {
-//         // Account which want to change data
-//         $userId = $user->id;
-//         $divisionId = $user->division;
-//         if (
-//             $auth->id == $userId ||
-//             $auth->hasRole(ADMIN_CMS_COMPANY_ROLE) ||
-//             ($user->hasRole(USER_ROLE) &&
-//                 ($auth->hasRole(MANAGER_ROLE) &&
-//                     $auth->divisions->contains('id', $divisionId)))
-//         ) {
-//             return true;
-//         }
-//         return false;
-//     }
-// }
+if (!function_exists('_hasPermission')) {
+    /**
+     * Check permission
+     *
+     * @param $auth
+     * @param $user
+     * @return bool
+     */
+    function _hasPermission($auth, $user)
+    {
+        // Account which want to change data
+        // $userId = $user->id;
+        // $divisionId = $user->division;
+        // if (
+        //     $auth->id == $userId ||
+        //     $auth->hasRole(ADMIN_CMS_COMPANY_ROLE) ||
+        //     ($user->hasRole(USER_ROLE) &&
+        //         ($auth->hasRole(MANAGER_ROLE) &&
+        //             $auth->divisions->contains('id', $divisionId)))
+        // ) {
+        //     return true;
+        // }
+        // return false;
+    }
+}
