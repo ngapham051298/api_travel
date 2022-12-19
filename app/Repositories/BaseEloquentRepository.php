@@ -1,12 +1,13 @@
 <?php
-namespace Base\Repositories;
-abstract class BaseRepository implements BaseRepositoryInterface
+namespace App\Repositories\Base;
+
+abstract class BaseEloquentRepository implements BaseRepositoryInterface
 {
     protected $_model;
 
     public function __construct()
     {
-        $this->_model;
+        $this->setModel();
     }
 
     abstract public function getModel();

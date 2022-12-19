@@ -15,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         Paginator::useBootstrap();
-        $repositories = ['Base'];
+        $repositories = ['Base', 'Authn'];
         foreach ($repositories as $repo) {
             $this->app->bind(
                 'App\\Repositories\\' .
