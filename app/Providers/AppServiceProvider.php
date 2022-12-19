@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +14,22 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Paginator::useBootstrap();
+        $repositories = ['Base'];
+        foreach ($repositories as $repo) {
+            $this->app->bind(
+                'App\\Repositories\\' .
+                    $repo .
+                    '\\' .
+                    $repo .
+                    'RepositoryInterface',
+                'App\\Repositories\\' .
+                    $repo .
+                    '\\' .
+                    $repo .
+                    'EloquentRepository'
+            );
+        }
     }
 
     /**
