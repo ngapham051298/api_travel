@@ -11,18 +11,18 @@ class AuthnRequest extends BaseRequest
     public function rules()
     {
         return [
-            'email' => 'required|email|exists:users,email',
+            'email' => 'required|email||unique:users,email',
             'password' => 'required|min:6|max:12',
         ];
     }
 
-    public function failedValidation(Validator $validator)
+    public function failedValidation(Validator $validated)
     {
-        $errors = (new ValidationException($validator))->errors();
+        $errors = (new ValidationException($validated))->errors();
         throw new HttpResponseException(
             _error(
                 $errors,
-                __('message.email_password_incorrect'),
+                'message.email_password_incorrect',
                 HTTP_BAD_REQUEST
             )
         );

@@ -1,7 +1,7 @@
 <?php
-namespace App\Repository\Authn;
+namespace App\Repositories\Authn;
 
-use Base\Repositories\BaseRepositoryInterface;
+use App\Repositories\Base\BaseRepositoryInterface;
 
 interface AuthnRepositoryInterface extends BaseRepositoryInterface
 {

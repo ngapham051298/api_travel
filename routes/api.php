@@ -13,4 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::namespace('Api\v1')->group(function () {});
+Route::group([], function () {
+    Route::post('register', 'AuthnController@register');
+    Route::post('login', 'AuthnController@login');
+});
