@@ -14,7 +14,7 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone')->nullable();
-            $table->integer('roleId')->default(3);
+            $table->integer('role_id')->default(3);
             $table->string('address')->nullable();
             $table->string('birthday')->nullable();
         });
@@ -29,7 +29,7 @@ return new class extends Migration {
     {
         Schema::table('users', function (Blueprint $table) {
             $table->dropColumn('phone');
-            $table->dropColumn('roleId');
+            $table->dropColumn('role_id');
             $table->dropColumn('address');
             $table->dropColumn('birthday');
         });
