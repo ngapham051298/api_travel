@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group([], function () {
-    Route::post('register', 'AuthnController@register');
-    Route::post('login', 'AuthnController@login');
+Route::post('register', 'AuthnController@register');
+Route::post('login', 'AuthnController@login');
+Route::group(['middleware' => 'auth:api'], function () {
+    Route::post('users/create-accounts', 'UserController@create');
 });

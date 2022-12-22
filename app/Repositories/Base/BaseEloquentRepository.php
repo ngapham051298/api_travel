@@ -19,12 +19,12 @@ abstract class BaseEloquentRepository implements BaseRepositoryInterface
 
     public function all()
     {
-        $this->_model->all();
+        return $this->_model->all();
     }
 
     public function create($attribute = [])
     {
-        $this->_model->create($attribute);
+        return $this->_model->create($attribute);
     }
 
     public function find($id)
@@ -34,7 +34,7 @@ abstract class BaseEloquentRepository implements BaseRepositoryInterface
 
     public function findByEmail($email)
     {
-        $this->_model->findByEmail($email);
+        return $this->_model->findByEmail($email);
     }
 
     public function delete($id)
@@ -55,7 +55,7 @@ abstract class BaseEloquentRepository implements BaseRepositoryInterface
     }
     public function insert($attribute = [])
     {
-        $this->_model->insert();
+        return $this->_model->insert();
     }
     public function destroy($id)
     {

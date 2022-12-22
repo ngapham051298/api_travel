@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use App\Repositories\Authn\AuthnRepositoryInterface;
+use Illuminate\Support\Facades\Auth;
 
 class AuthnService
 {
@@ -19,10 +20,25 @@ class AuthnService
             'name' => $param['email'],
         ];
         $user = $this->authnInterface->create($attributes);
-        // $data = [
-        //     'token' => $user->createToken('MyApp')->accessToken,
-        //     'name' => $user->name,
-        // ];
+
         return $user;
+    }
+    public function login($param)
+    {
+        if (
+            Auth::attempt([
+                'email' => $param['email'],
+                'password' => $param['password'],
+            ])
+        ) {
+            $user = Auth::user();
+            $success['token'] = $user->createToken('MyApp')->accessToken;
+            $success['name'] = $user->name;
+            return [
+                'token' => $success['token'],
+                'users' => $user,
+            ];
+        }
+        return false;
     }
 }
