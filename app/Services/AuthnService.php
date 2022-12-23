@@ -2,14 +2,19 @@
 namespace App\Services;
 
 use App\Repositories\Authn\AuthnRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 
 class AuthnService
 {
     protected $authnInterface;
-    public function __construct(AuthnRepositoryInterface $authnInterface)
-    {
+    protected $userInterface;
+    public function __construct(
+        AuthnRepositoryInterface $authnInterface,
+        UserRepositoryInterface $userInterface
+    ) {
         $this->authnInterface = $authnInterface;
+        $this->userInterface = $userInterface;
     }
 
     public function register($param)
@@ -40,5 +45,13 @@ class AuthnService
             ];
         }
         return false;
+    }
+
+    public function profile()
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+        $profile = $this->userInterface->showUser($userId);
+        return $profile;
     }
 }

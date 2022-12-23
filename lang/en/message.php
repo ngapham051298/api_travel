@@ -6,4 +6,5 @@ return [
     'createFail' => 'Create account fail!',
     'loginSuccess' => 'User login successfully.',
     'notFound' => 'Not Found',
+    'success' => 'success',
 ];

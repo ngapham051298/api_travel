@@ -23,3 +23,9 @@ define('HTTP_VERSION_NOT_SUPPORTED', 505);
 
 // pageSize
 define('PAGE_SIZE', 10);
+
+// role
+define('ADMIN', 1);
+define('MANAGER', 2);
+define('USER', 3);
+define('CUSTOMER', 4);
