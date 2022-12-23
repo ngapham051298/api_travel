@@ -7,6 +7,7 @@ use App\Http\Requests\AuthnRequest;
 use App\Services\AuthnService;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class AuthnController extends Controller
@@ -23,7 +24,9 @@ class AuthnController extends Controller
             $user = $this->authnService->register($param);
             return _success($user, __('message.registerSuccess'), HTTP_CREATED);
         } catch (Exception $e) {
-            Log::error(__METHOD__ . ' -' . __LINE__ . ' : ' . $e->getMessage());
+            Log::error(
+                __METHOD__ . ' - ' . __LINE__ . ' : ' . $e->getMessage()
+            );
             return _errorSystem();
         }
     }
@@ -42,7 +45,22 @@ class AuthnController extends Controller
             }
             return _error(null, __('message.notFound'), HTTP_NOT_FOUND);
         } catch (Exception $e) {
-            Log::error(__METHOD__ . ' -' . __LINE__ . ' : ' . $e->getMessage());
+            Log::error(
+                __METHOD__ . ' - ' . __LINE__ . ' : ' . $e->getMessage()
+            );
+            return _errorSystem();
+        }
+    }
+
+    public function profile()
+    {
+        try {
+            $user = $this->authnService->profile();
+            return _success($user, __('message.success'), HTTP_SUCCESS);
+        } catch (Exception $e) {
+            Log::error(
+                __METHOD__ . ' - ' . __LINE__ . ' : ' . $e->getMessage()
+            );
             return _errorSystem();
         }
     }

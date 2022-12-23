@@ -16,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::post('register', 'AuthnController@register');
 Route::post('login', 'AuthnController@login');
 Route::group(['middleware' => 'auth:api'], function () {
+    Route::get('profile', 'AuthnController@profile');
     Route::post('users/create-accounts', 'UserController@create');
 });
