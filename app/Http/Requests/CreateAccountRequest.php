@@ -14,7 +14,7 @@ class CreateAccountRequest extends BaseRequest
         return [
             'name' => 'required|string',
             'email' => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6|max:20',
+            'password' => 'required|string|min:6|max:12',
             'role_id' => 'int|exists:roles,id',
             'address' => 'nullable|string',
             'birthday' => 'nullable|string',

@@ -4,6 +4,7 @@ namespace App\Services;
 use App\Repositories\Authn\AuthnRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthnService
 {
@@ -24,9 +25,7 @@ class AuthnService
             'password' => $param['password'],
             'name' => $param['email'],
         ];
-        $user = $this->authnInterface->create($attributes);
-
-        return $user;
+        return $this->authnInterface->create($attributes);
     }
     public function login($param)
     {
@@ -51,7 +50,31 @@ class AuthnService
     {
         $user = Auth::user();
         $userId = $user->id;
-        $profile = $this->userInterface->showUser($userId);
-        return $profile;
+        return $this->userInterface->showUser($userId);
+    }
+
+    public function update($request)
+    {
+        $user = Auth::user();
+        $userId = $user->id;
+        $attributes = $request->all();
+        $user = $this->userInterface->update($userId, $attributes);
+        return $user;
+    }
+
+    public function changePassword($request)
+    {
+        $user = Auth::user();
+        $checkPassword = Hash::check($request->old_password, $user->password);
+        if (!$checkPassword) {
+            return _error(
+                null,
+                __('message.current_password_error'),
+                HTTP_BAD_REQUEST
+            );
+        }
+        $user->password = $request->password;
+        $user->save();
+        return _success($user, __('message.success'), HTTP_CREATED);
     }
 }
