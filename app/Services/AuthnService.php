@@ -10,12 +10,15 @@ class AuthnService
 {
     protected $authnInterface;
     protected $userInterface;
+    protected $mailService;
     public function __construct(
         AuthnRepositoryInterface $authnInterface,
-        UserRepositoryInterface $userInterface
+        UserRepositoryInterface $userInterface,
+        MailService $mailService
     ) {
         $this->authnInterface = $authnInterface;
         $this->userInterface = $userInterface;
+        $this->mailService = $mailService;
     }
 
     public function register($param)
@@ -38,6 +41,12 @@ class AuthnService
             $user = Auth::user();
             $success['token'] = $user->createToken('MyApp')->accessToken;
             $success['name'] = $user->name;
+            $this->mailService->sendMail(
+                $param['email'],
+                __('message.login'),
+                ['title' => 'Login', 'name' => $user->name],
+                'login_success'
+            );
             return [
                 'token' => $success['token'],
                 'users' => $user,

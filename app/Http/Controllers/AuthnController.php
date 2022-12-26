@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Log;
 class AuthnController extends Controller
 {
     protected $authnService;
+
     public function __construct(AuthnService $authnService)
     {
         $this->authnService = $authnService;
