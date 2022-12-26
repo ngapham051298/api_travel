@@ -50,8 +50,9 @@ abstract class BaseEloquentRepository implements BaseRepositoryInterface
     {
         $result = $this->find($id);
         if ($result) {
-            return $result->update($id, $attribute);
+            return $result->update($attribute);
         }
+        return false;
     }
     public function insert($attribute = [])
     {
